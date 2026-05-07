@@ -1,0 +1,5 @@
+{
+  "version": "0.1.1",
+  "exe": "https://github.com/james-wagner/done-today/releases/download/v0.1.1/DoneToday-0.1.1.exe",
+  "notes": "First public build. Default update source now points at this GitHub repo so future versions are detected automatically."
+}
