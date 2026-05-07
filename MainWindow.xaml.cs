@@ -48,6 +48,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        var v = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        if (v != null) Title = $"Done Today  —  v{v.Major}.{v.Minor}.{v.Build}";
         _itemsView = CollectionViewSource.GetDefaultView(Items);
         _itemsView.Filter = o => o is TodoItem t && !t.Archived;
         TodoList.ItemsSource = _itemsView;
