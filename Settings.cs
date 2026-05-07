@@ -17,8 +17,12 @@ public class Settings
 
     public double FontSize { get; set; } = 16;
 
+    /// <summary>Default update manifest, served from the GitHub repo's main branch.</summary>
+    public const string DefaultUpdateSource =
+        "https://raw.githubusercontent.com/james-wagner/done-today/main/latest.json";
+
     /// <summary>URL (http(s)) or local folder/file path holding latest.json (with version + exe).</summary>
-    public string UpdateSource { get; set; } = "";
+    public string UpdateSource { get; set; } = DefaultUpdateSource;
 
     // Saved window geometry. Null on first run → fall back to default position.
     public double? WindowLeft { get; set; }
@@ -36,7 +40,10 @@ public class Settings
             if (File.Exists(Path_))
             {
                 var json = File.ReadAllText(Path_);
-                return JsonSerializer.Deserialize<Settings>(json) ?? new Settings();
+                var s = JsonSerializer.Deserialize<Settings>(json) ?? new Settings();
+                // Coerce empty UpdateSource to the bundled default (handles upgrades from before the default was set)
+                if (string.IsNullOrWhiteSpace(s.UpdateSource)) s.UpdateSource = DefaultUpdateSource;
+                return s;
             }
         }
         catch { }
