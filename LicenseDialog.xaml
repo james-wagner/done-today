@@ -1,0 +1,58 @@
+<Window x:Class="DoneToday.LicenseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="License"
+        Icon="icon.ico"
+        Width="560" Height="540"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Background="{StaticResource Brush.Bg}"
+        Foreground="{StaticResource Brush.Text}"
+        FontFamily="Trebuchet MS, Segoe UI"
+        FontSize="13">
+    <Grid Margin="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Done Today — End User License Agreement"
+                   FontWeight="SemiBold"
+                   FontSize="15"
+                   Foreground="{StaticResource Brush.Text}"
+                   Margin="0,0,0,8"/>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource Brush.BgAlt}"
+                BorderBrush="{StaticResource Brush.Border}"
+                BorderThickness="1"
+                CornerRadius="4">
+            <TextBox x:Name="LicenseText"
+                     IsReadOnly="True"
+                     IsReadOnlyCaretVisible="False"
+                     Background="Transparent"
+                     Foreground="{StaticResource Brush.Text}"
+                     BorderThickness="0"
+                     Padding="10"
+                     FontFamily="Consolas, Cascadia Mono, Courier New"
+                     FontSize="12"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Disabled"/>
+        </Border>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,12,0,0">
+            <Button Content="Close"
+                    Style="{StaticResource GhostButton}"
+                    IsCancel="True"
+                    IsDefault="True"
+                    Click="Close_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

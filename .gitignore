@@ -1,0 +1,21 @@
+## Build / publish output
+bin/
+obj/
+dist/
+*.dll
+*.pdb
+
+## VS / Rider scratch
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+## OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+## Local secrets / per-machine settings
+*.local.json
