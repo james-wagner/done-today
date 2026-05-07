@@ -70,8 +70,15 @@ if ($newVersion -ne $currentVersion) {
 Push-Location $root
 try {
     if ($Publish) {
-        Write-Host "Publishing single-file..." -ForegroundColor Cyan
-        & dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o "dist"
+        Write-Host "Publishing self-contained single-file..." -ForegroundColor Cyan
+        # Self-contained + native-extract is the only combination that produces a working
+        # WPF single-file on .NET 10. EnableCompressionInSingleFile cuts size ~60%.
+        & dotnet publish -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=true `
+            --ignore-failed-sources `
+            -o "dist"
         if ($LASTEXITCODE -ne 0) { throw "publish failed" }
         $exe = Join-Path $root "dist\DoneToday.exe"
     } else {
